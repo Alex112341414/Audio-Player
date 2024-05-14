@@ -18,16 +18,16 @@ function playSong(){
     songTitle[0].textContent = data.title[currentSong];
     let img = document.getElementsByClassName("row1")
     img[0].style.backgroundImage = "url(" + data.poster[currentSong] + ")"
-
     let main = document.getElementsByClassName("main")
     main.style.backgroundImage = "url(" + data.poster[currentSong] + ")"
+    // song.play()
 }
 
 window.onload = function(){
     playSong()
 }
 
-song.play()
+
 
 function playerPauseSong(){
     let play = document.getElementById("play")
@@ -39,4 +39,58 @@ function playerPauseSong(){
         song.pause()
         play.src = "images/play-button-arrowhead.png"
     }
+}
+
+song.addEventListener("timeupdate",function(){
+ console.log(song.currentTime)
+ console.log(song.duration)
+
+ let fill = document.getElementsByClassName("fill")
+
+ let position = song.currentTime / song.duration
+
+ fill[0].style.marginLeft = position * 100 + "100%"
+ convertTime(song.currentTime)
+ 
+ if(song.ended){
+     next()
+
+ }
+})
+let currentTime = document.getElementsByClassName("currentTime")
+
+function convertTime(seconds){
+ 
+
+ let min  = Math.floor(seconds/60)
+ let sec = Math.floor(seconds%60)
+
+ min = (min < 10 ) ? "0" + min:min
+ sec = (sec < 10 ) ? "0" + sec:sec
+
+ currentTime[0].textContent = min + ":" + sec 
+ totalTime(song.duration)
+}
+
+function totalTime(seconds){
+    let min = Math.floor(seconds/60)
+    let sec = Math.floor(seconds%60)
+
+    currentTime[0].textContent += "/" + min +":" + sec
+
+}
+
+function next(){
+    currentSong++
+    if(currentSong >= data.song.length){
+        currentSong = 0
+    }
+    playSong()
+}
+function prev(){
+    currentSong--
+    if(currentSong >= data.song.length){
+        currentSong = 0
+    }
+    playSong()
 }
