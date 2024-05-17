@@ -45,7 +45,9 @@ html,body{
   color: aqua;
   height: 10%;
   width: 100%;
+  background-color: rgb(113, 129, 129);
   text-align: center;
+  
   font-family: monospace;
   font-size: 18px;
 }
