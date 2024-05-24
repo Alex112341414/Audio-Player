@@ -34,9 +34,7 @@ window.onload = function(){
 
 
 function playSong(){
-    console.log(currentSong);
     song.src = data.song[currentSong]
-    console.log(song);
     let  songTitle = document.getElementsByClassName("songtitle")
     songTitle[0].textContent = data.title[currentSong];
     let img = document.getElementsByClassName("row1")
@@ -45,7 +43,7 @@ function playSong(){
     main[0].style.backgroundImage = "url(" + data.poster[currentSong] + ")"
     song.play()
 }
-    
+
 function playerPauseSong(){
     let play = document.getElementById("play")
 
@@ -114,7 +112,7 @@ function prev(){
 
 
 function mute(){
-     mute = document.getElementById("mute")
+     let mute = document.getElementById("mute")
     if(song.muted){
         song.muted = false
         mute.src = "images/volume.png"
